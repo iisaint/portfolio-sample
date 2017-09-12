@@ -73,6 +73,21 @@ class UserInfo extends Component {
                     this.setState({
                         slt: (this.state.web3.toDecimal(result)) / (10 ** 8)
                     });
+
+                    // 持有組合的 Portfolio2之SLS
+                    return this.state.portfolioInstance.balanceOfSLS.call('Portfolio2', accounts[0]);
+                }).then((result) => {
+                    console.log('Portfolio2 SLS ', (this.state.web3.toDecimal(result)) / (10 ** 8));
+
+                    // 持有組合的 Portfolio2之SLS
+                    return this.state.portfolioInstance.balanceOfSLT.call('Portfolio2', accounts[0]);
+                }).then((result) => {
+                    console.log('Portfolio2 SLT ', (this.state.web3.toDecimal(result)) / (10 ** 8));
+
+                    // 最新組合資訊的 Portfolio2之SLS剩餘數量
+                    return this.state.portfolioInstance.getRemainSLSAmount.call('Portfolio2');
+                }).then((result) => {
+                    console.log('remaining amount of Portfolio2', (this.state.web3.toDecimal(result)) / (10 ** 8));
                 })
             })
         }
